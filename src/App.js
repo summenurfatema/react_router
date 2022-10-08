@@ -16,7 +16,9 @@ function App() {
           path: '/', element: <Home></Home>
         },
         {
-          path: '/home', element: <Home></Home>
+          path: '/home',
+          loader: async () => fetch('tshirt.json'),
+          element: <Home></Home>
         },
         {
           path: '/orders', element: <Orders></Orders>

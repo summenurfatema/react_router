@@ -1,9 +1,10 @@
 import React from 'react';
 
-const TShirt = () => {
+const TShirt = ({ tshirt }) => {
+    const { picture } = tshirt;
     return (
         <div>
-
+            <img src={picture} alt='' />
         </div>
     );
 };
