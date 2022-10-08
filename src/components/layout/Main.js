@@ -1,13 +1,18 @@
 import React from 'react';
+import { NavLink } from 'react-router-dom';
 
-import Header from '../Header/Header';
+
 
 const Main = () => {
     return (
-        <div>
-            <Header></Header>
+        <nav>
+            <NavLink to='/'>Home</NavLink>
+            <NavLink to='/orders'>Orders</NavLink>
+            <NavLink to='/about'>About</NavLink>
 
-        </div>
+
+
+        </nav>
     );
 };
 
