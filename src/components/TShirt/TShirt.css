@@ -1,0 +1,10 @@
+.tshirt-info {
+    border: 2px solid blue;
+    padding: 10px;
+    border-radius: 15px;
+    margin: 10px;
+}
+
+.tshirt-info img {
+    height: 250px;
+}
