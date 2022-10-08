@@ -1,9 +1,9 @@
 import React from 'react';
 
-const Cart = () => {
+const Cart = ({ cart }) => {
     return (
         <div>
-            order summary
+            order summary {cart.length}
         </div>
     );
 };

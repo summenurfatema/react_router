@@ -26,7 +26,7 @@ const Home = () => {
             </div>
 
             <div className='cart-container'>
-                <Cart></Cart>
+                <Cart cart={cart}></Cart>
             </div>
 
         </div>
