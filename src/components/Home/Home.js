@@ -6,6 +6,9 @@ import './Home.css'
 
 const Home = () => {
     const tshirts = useLoaderData()
+    const handleAddButton = tshirt => {
+        console.log(tshirt)
+    }
     return (
         <div className='home-container'>
             <div className='tshirt-container'>
@@ -13,11 +16,14 @@ const Home = () => {
                     tshirts.map(tshirt => <TShirt
                         key={tshirt.id}
                         tshirt={tshirt}
+                        handleAddButton={handleAddButton}
                     ></TShirt>)
                 }
             </div>
 
-            <div className='cart-container'><Cart></Cart> </div>
+            <div className='cart-container'>
+                <Cart></Cart>
+            </div>
 
         </div>
     );
