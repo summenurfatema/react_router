@@ -9,9 +9,19 @@ const Home = () => {
 
     const [cart, setCart] = useState([])
 
+        ;
+
     const handleAddButton = tshirt => {
-        const newCart = [...cart, tshirt]
-        setCart(newCart)
+        const exist = cart.find(ts => ts._id === tshirt._id);
+        if (exist) {
+            alert('no')
+        }
+        else {
+            const newCart = [...cart, tshirt]
+            setCart(newCart)
+        }
+
+
     }
     return (
         <div className='home-container'>
