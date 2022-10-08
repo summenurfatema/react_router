@@ -1,4 +1,4 @@
-import React from 'react';
+import React, { useState } from 'react';
 import { useLoaderData } from 'react-router-dom';
 import Cart from '../Cart/Cart';
 import TShirt from '../TShirt/TShirt';
@@ -6,8 +6,12 @@ import './Home.css'
 
 const Home = () => {
     const tshirts = useLoaderData()
+
+    const [cart, setCart] = useState([])
+
     const handleAddButton = tshirt => {
-        console.log(tshirt)
+        const newCart = [...cart, tshirt]
+        setCart(newCart)
     }
     return (
         <div className='home-container'>
