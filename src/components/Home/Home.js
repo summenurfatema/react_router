@@ -11,6 +11,8 @@ const Home = () => {
 
         ;
 
+    // add to cart
+
     const handleAddButton = tshirt => {
         const exist = cart.find(ts => ts._id === tshirt._id);
         if (exist) {
@@ -20,8 +22,10 @@ const Home = () => {
             const newCart = [...cart, tshirt]
             setCart(newCart)
         }
-
-
+    }
+    const handleRemoveButton = tshirt => {
+        const remain = cart.filter(ts => ts._id !== tshirt._id)
+        setCart(remain)
     }
     return (
         <div className='home-container'>
@@ -36,7 +40,9 @@ const Home = () => {
             </div>
 
             <div className='cart-container'>
-                <Cart cart={cart}></Cart>
+                <Cart cart={cart}
+                    handleRemoveButton={handleRemoveButton}
+                ></Cart>
             </div>
 
         </div>

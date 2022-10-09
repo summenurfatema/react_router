@@ -1,9 +1,10 @@
 
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
-import Main from './components/layout/Main';
+
 import Home from './components/Home/Home.js';
 import Orders from './components/Orders/Orders';
+import Main from './components/Main/Main';
 
 
 function App() {
