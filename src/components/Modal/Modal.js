@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 
 const Modal = () => {
     const [error, setError] = useState(null);
-    const [loading, setLoading] = useState(false)
+
     const handleSubmit = (e) => {
         var id = Math.floor(Math.random() * 1000000000);
         e.preventDefault()
@@ -18,7 +18,7 @@ const Modal = () => {
             email, phone, amount
         }
         console.log(billingBody);
-        fetch('http://localhost:8000/api/add-billing', {
+        fetch('https://billing-server-eight.vercel.app/add-billing', {
             method: 'POST',
             headers: {
                 'content-type': 'application/json'
@@ -30,7 +30,7 @@ const Modal = () => {
                 console.log(data)
                 if (data.acknowledged) {
                     alert(`You have added successfully`)
-                    setLoading(false)
+
                     window.location.reload()
 
                 }
@@ -68,7 +68,7 @@ const Modal = () => {
                         <input type='text' className='h-[50px] w-full rounded-full px-4 text-xl' placeholder='Amount' name='amount' />
                         <button className='btn bg-red-900 rounded-full'>Submit</button>
                     </form>
-                    {loading && <h1>loading</h1>}
+
 
                 </div>
             </div>

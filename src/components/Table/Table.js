@@ -1,20 +1,47 @@
-import React, { useEffect, useState } from 'react';
+import React, { useState, useEffect } from "react";
 
 const Table = () => {
-    const [bookings, setBookings] = useState([])
-    const [loading, setLoading] = useState(false)
-    const [billingId, setBillingId] = useState(null)
+    const [billings, setBillings] = useState([]);
+    const [loading, setLoading] = useState(false);
+    const [page, setPage] = useState(1);
+    const perPage = 10;
+    const pageCount = Math.ceil(billings.length / perPage);
 
     useEffect(() => {
-        setLoading(true)
-        fetch(`http://localhost:8000/api/billing-list`)
-            .then(res => res.json())
-            .then(data => {
-                setLoading(false)
-                setBookings(data)
-                setBillingId(data.generatedBillingId)
+        setLoading(true);
+        fetch(`https://billing-server-eight.vercel.app/billing-list`)
+            .then((res) => res.json())
+            .then((data) => {
+                setLoading(false);
+                setBillings(data);
+            });
+    }, []);
+
+    const paginatedData = billings.slice(
+        (page - 1) * perPage,
+        (page - 1) * perPage + perPage
+    );
+
+    const handleClick = (e, index) => {
+        setPage(index);
+    };
+    // delete
+    const handleDelete = billing => {
+        const agree = window.confirm('Are you sure to delete ?')
+        if (agree) {
+            fetch(`https://billing-server-eight.vercel.app/delete-billing/${billing._id}`, {
+                method: 'DELETE'
             })
-    }, [])
+                .then(res => res.json())
+                .then(data => {
+                    if (data.deletedCount > 0) {
+                        alert('This informationhas been deleted successfully')
+                        window.location.reload()
+                    }
+                })
+        }
+    }
+
 
     return (
         <div>
@@ -24,22 +51,43 @@ const Table = () => {
                         <tr>
                             <th>Billing Id</th>
                             <th>Name</th>
-                            <th>Job</th>
-                            <th>Favorite Color</th>
+                            <th>Email</th>
+                            <th>Phone Number</th>
+                            <th>Amount</th>
+                            <th>Action</th>
                         </tr>
                     </thead>
                     <tbody>
-                        {bookings.map((booking) => (
-                            <tr>
-                                <th>{loading ? "Loading..." : billingId}</th>
-                                <td>{booking.id}</td>
-                                <td>{booking.name}</td>
-                                <td>{booking.email}</td>
-                                <td>{booking.amount}</td>
+                        {paginatedData.map((billing) => (
+                            <tr className="text-xl text-red-900 font-semibold">
+                                <th>{loading ? "Id is Gererating..." : billing.id}</th>
+                                <td>{billing.name}</td>
+                                <td>{billing.email}</td>
+                                <td>{billing.phone}</td>
+                                <td>{billing.amount}</td>
+                                <td>
+                                    <button className="bg-red-900 text-white px-4 py-2">
+                                        Edit
+                                    </button>
+                                    <button onClick={() => handleDelete(billing)} className="bg-red-900 text-white px-4 py-2">
+                                        Remove
+                                    </button>
+                                </td>
                             </tr>
                         ))}
                     </tbody>
                 </table>
+            </div>
+            <div className="mt-4">
+                {Array.from({ length: pageCount }, (_, index) => (
+                    <button
+                        key={index}
+                        onClick={(e) => handleClick(e, index + 1)}
+                        className="bg-red-900 text-white px-2 py-2 mr-2"
+                    >
+                        {index + 1}
+                    </button>
+                ))}
             </div>
         </div>
     );
