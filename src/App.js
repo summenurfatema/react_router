@@ -2,9 +2,8 @@
 import './App.css';
 import { createBrowserRouter, RouterProvider } from 'react-router-dom';
 
-import Home from './components/Home/Home.js';
-import Orders from './components/Orders/Orders';
-import Main from './components/Main/Main';
+
+import Main from './layout/Main';
 
 
 function App() {
@@ -13,17 +12,8 @@ function App() {
     {
       path: '/', element: <Main></Main>,
       children: [
-        {
-          path: '/', element: <Home></Home>
-        },
-        {
-          path: '/home',
-          loader: async () => fetch('tshirt.json'),
-          element: <Home></Home>
-        },
-        {
-          path: '/orders', element: <Orders></Orders>
-        }
+
+
 
       ]
     }
